@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ml-project.css">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <section class="project-detail" id="ml-project">
+        <a href="Kezia_Website.html#project" class="back-btn">
+            <i class='bx bx-left-arrow-alt'></i>
+            Back
+        </a>
+        <h2 class="heading">Machine Learning Cost Estimator</h2>
+        
+        <div class="project-detail-container">
+            <div class="project-overview">
+                <h3 class="sub-heading">Project Overview</h3>
+                <p>In collaboration with Husgruppen, a start-up construction company in Sweden, this project aims to <span class="highlight">estimate construction costs based on input parameters</span>. These parameters include wall area, number of floors, window quantities, door types, and other building specifications. The model is trained on historical construction data using multiple linear regression and other machine learning algorithms, which analyze the relationship between building features and final costs. The model's accuracy is evaluated using performance metrics like Root Mean Squared Error (RMSE) and Mean Absolute Error (MAE).</p>
+            </div>
+            
+            
+            <div class="project-details">
+                <h3 class="sub-heading">Dataset</h3>
+                <p>The model uses historical construction data from Husgruppen's previous projects. Key features include wall area measurements, inner wall specifications, roof area, floor area, window quantities (standard and oversized), door quantities (standard and sliding), snow zone classification, and delivery and mounting information.</p>
+                <p class="note">Note: The actual dataset cannot be shared publicly as it contains confidential business information.</p>
+
+                <div class="image-gallery">
+                    <div class="image-box">
+                        <img src="dataset.png" alt="Dataset Snippet" class="project-image">
+                        <div class="image-caption">Sample dataset with key building parameters used for training</div>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Feature Exploration</h3>
+                <p>We began by analyzing the construction dataset and examining the distribution of various building specifications and their relationships with final construction costs.</p>
+                
+                <h3 class="sub-heading">Data Preprocessing</h3>
+                <p>Data Preprocessing included feature normalization using MinMaxScaler and data augmentation. We applied noise addition data augmentation to create synthetic data points for more robust model training.</p>
+            
+                
+                <h3 class="sub-heading">Model Evaluation</h3>
+                <p>We experimented with multiple algorithms including Linear Regression, Multilayer Perceptron neural networks, and XGBoost gradient boosting to identify the optimal cost prediction model. After comparative analysis, <span class="highlight">the linear regression model was selected for its combination of strong performance and high interpretability</span>—a crucial factor for Husgruppen's stakeholders. The model was trained on augmented data with careful normalization and validation to ensure reliable cost predictions across different building specifications.</p>
+
+                <div class="image-gallery double">
+                    <div class="image-box">
+                        <img src="output.png" alt="Prediction vs Real Values" class="project-image">
+                        <div class="image-caption">Cost prediction vs real values with confidence intervals</div>
+                    </div>
+                    <div class="image-box">
+                        <img src="model.png" alt="Model Comparison" class="project-image">
+                        <div class="image-caption">Performance comparison of different ML models</div>
+                    </div>
+                </div>
+
+                
+                <h3 class="sub-heading">Results and Evaluation</h3>
+                <p>Linear Regression emerged as the best-performing model, providing a balance of accuracy and interpretability for construction cost estimation. <span class="highlight">We evaluated the model using R-squared and Mean Absolute Error (MAE) metrics, achieving 81.82% of predictions within the calculated confidence interval.</span> For an interactive demonstration of the model's performance across different building specifications, you can download and open Demo.html to see the estimator in action.</p>
+
+                <div class="formula-box">
+                    <img src="equation.png" alt="Final Equation" class="formula-image">
+                    <div class="formula-caption">Final linear regression equation with coefficients for each building parameter</div>
+                </div>
+                
+                <div class="results-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">81.82<span>%</span></div>
+                        <div class="stat-label">Confidence Interval Accuracy</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">113,457<span>SEK</span></div>
+                        <div class="stat-label">Mean Absolute Error</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tech-stack">
+                <h3 class="sub-heading">Technologies Used</h3>
+                <div class="tech-icons">
+                    <div class="tech-icon">
+                        <i class='bx bxl-python'></i>
+                        <span>Python</span>
+                    </div>
+                    <div class="tech-icon">
+                        <i class='bx bx-line-chart'></i>
+                        <span>Scikit-learn</span>
+                    </div>
+                    <div class="tech-icon">
+                        <i class='bx bx-scatter-chart'></i>
+                        <span>Pandas</span>
+                    </div>
+                    <div class="tech-icon">
+                        <i class='bx bx-chart'></i>
+                        <span>Matplotlib</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-conclusion">
+                <h3 class="sub-heading">Conclusion</h3>
+                <p>The final machine learning model provides accurate cost estimates for construction projects, serving as a valuable tool for quick and reliable cost forecasting. The linear regression approach offers both strong predictive performance and the interpretability needed for business stakeholders to understand and trust the results.</p>
+                
+                <div class="btn-group">
+                    <a href="file:///C:/Users/valer/Downloads/Demo%20(1).html" class="btn">View Demo</a>
+                    <a href="https://github.com/apriliakeziaa/MLProject/blob/main/mlproject-Husgruppen%20Final%20Report.pdf" class="btn">Full Report</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

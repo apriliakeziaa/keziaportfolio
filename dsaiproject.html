@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ml-project.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dsaiproject.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>DSAI Mini-Project - Student Alcohol Consumption</title>
+</head>
+
+<body>
+    <section class="project-detail" id="dsai-project">
+        <a href="Kezia_Website.html#project" class="back-btn">
+            <i class='bx bx-left-arrow-alt'></i>
+            Back
+        </a>
+        <h2 class="heading">Student Alcohol Consumption Analysis</h2>
+        
+        <div class="project-detail-container">
+            <div class="project-overview">
+                <h3 class="sub-heading">Project Overview</h3>
+                <p>This mini-project for SC1015 (Introduction to Data Science and Artificial Intelligence) explores and analyzes <span class="highlight">the Student Alcohol Consumption Dataset</span>. The project investigates potential correlations between student attributes, study habits, and academic performance, with a focus on predicting student outcomes and identifying differences between schools. Using data cleaning, exploratory data analysis, classification models, and hypothesis testing, this project provides valuable insights into factors that influence student success.</p>
+            </div>
+            
+            <div class="image-gallery">
+                <div class="image-box">
+                    <img src="stats3.png" alt="Student Dataset" class="project-image">
+                    <div class="image-caption">Cleaned student dataset showing key attributes used in the analysis</div>
+                </div>
+            </div>
+            
+            <div class="project-details">
+                <h3 class="sub-heading">Problem Definition</h3>
+                <p>The project addresses two main research questions:</p>
+                <ol>
+                    <li>Can we predict whether a student will pass or fail both subjects based on their attributes?</li>
+                    <li>Are there significant differences in students' conditions, study habits, and grades between students who attend Gabriel Pereira school and those who attend Mousinho da Silveira school?</li>
+                </ol>
+                
+                <h3 class="sub-heading">Data Preprocessing</h3>
+                <p>We began with comprehensive data cleaning to prepare the dataset for analysis. This involved merging data from multiple sources, handling missing values, removing duplicates, and transforming variables into appropriate formats. <span class="highlight">Feature engineering was performed to create a binary pass/fail target variable</span> based on student performance in mathematics and Portuguese language courses.</p>
+                
+                <div class="image-gallery double">
+                    <div class="image-box">
+                        <img src="stats1.png" alt="Decision Tree Classifier" class="project-image">
+                        <div class="image-caption">Decision tree classifier showing feature importance in predicting student outcomes</div>
+                    </div>
+                    <div class="image-box">
+                        <img src="stats2.png" alt="Study Time vs Grades" class="project-image">
+                        <div class="image-caption">Visualization of the relationship between study time and student grades</div>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Models and Analysis Techniques</h3>
+                <p>We employed multiple analytical techniques to address our research questions:</p>
+                
+                <div class="analysis-methods">
+                    <div class="method-box">
+                        <h4>Decision Tree Classifier</h4>
+                        <p>Used to predict student pass/fail status based on various attributes. The model revealed that <span class="highlight">second-term math grades (MG2) were the most important feature</span> in determining whether a student would pass or fail both subjects.</p>
+                    </div>
+                    
+                    <div class="method-box">
+                        <h4>Hypothesis Testing</h4>
+                        <p>Conducted t-tests to compare study habits and academic performance between schools. This analysis revealed significant differences in Portuguese grades and study time between students from different schools.</p>
+                    </div>
+                    
+                    <div class="method-box">
+                        <h4>Correlation Analysis</h4>
+                        <p>Examined relationships between various factors and academic performance. Surprisingly, we found no strong correlation between alcohol consumption and grades, contrary to initial expectations.</p>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Key Findings</h3>
+                <div class="findings-grid">
+                    <div class="finding-card">
+                        <div class="finding-icon">
+                            <i class='bx bx-book-reader'></i>
+                        </div>
+                        <h4>Study Time Impact</h4>
+                        <p>Study time showed a weak positive correlation with grades. Students who studied more generally achieved higher median math and Portuguese grades.</p>
+                    </div>
+                    
+                    <div class="finding-card">
+                        <div class="finding-icon">
+                            <i class='bx bx-drink'></i>
+                        </div>
+                        <h4>Alcohol Consumption</h4>
+                        <p>Contrary to expectations, no strong correlation was found between alcohol consumption and academic performance.</p>
+                    </div>
+                    
+                    <div class="finding-card">
+                        <div class="finding-icon">
+                            <i class='bx bx-line-chart-down'></i>
+                        </div>
+                        <h4>Negative Factors</h4>
+                        <p>Travel time and previous failures showed weak negative correlations with academic performance.</p>
+                    </div>
+                </div>
+
+                <div class="tech-stack">
+                    <h3 class="sub-heading">Technologies Used</h3>
+                    <div class="tech-icons">
+                        <div class="tech-icon">
+                            <i class='bx bxl-python'></i>
+                            <span>Python</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class='bx bx-scatter-chart'></i>
+                            <span>Pandas</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class='bx bx-bar-chart-alt-2'></i>
+                            <span>Matplotlib</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class='bx bx-stats'></i>
+                            <span>Scikit-learn</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Conclusion</h3>
+                <p>This project demonstrated that while certain factors like study time and parental education have positive influences on student performance, others like travel time and previous failures have negative effects. <span class="highlight">The second-term math grade emerged as the strongest predictor of overall academic success</span>. Interestingly, we found that students from different schools showed similar performance in mathematics but differed significantly in Portuguese language grades. These findings provide valuable insights for educators and policymakers looking to improve student outcomes.</p>
+                
+                <div class="btn-group">
+                    <a href="https://github.com/SC1015Group9TheBest/MiniProject" class="btn">View Full Code</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

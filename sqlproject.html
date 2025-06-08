@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="sqlproject.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="ml-project.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>SQL Project - Tourism App Database</title>
+</head>
+
+<body>
+    <section class="project-detail" id="sql-project">
+        <a href="Kezia_Website.html#project" class="back-btn">
+            <i class='bx bx-left-arrow-alt'></i>
+            Back
+        </a>
+        <h2 class="heading">Tourism App Database Design</h2>
+        
+        <div class="project-detail-container">
+            <div class="project-overview">
+                <h3 class="sub-heading">Project Overview</h3>
+                <p>This project focuses on <span class="highlight">applying SQL database design principles and query optimization techniques</span> to develop a comprehensive backend system for a tourism application. The application aims to boost tourism and retail economy by incentivizing users to visit recommended malls and restaurants through voucher rewards. The database design encompasses user management, mall and restaurant tracking, recommendation systems, voucher allocation, and advanced analytics on user behavior.</p>
+            </div>
+
+            <div class="project-details">
+                <h3 class="sub-heading">Problem Statement</h3>
+                <p>The tourism agency required a database system to power their app which recommends malls, restaurants, and day packages to users. Key requirements included tracking user visits, managing voucher distribution, handling complaints, and supporting data-driven decision making through analytics. The system needed to support complex relationships between users, malls, restaurants, vouchers, and visit data.</p>
+                
+                <h3 class="sub-heading">Database Design</h3>
+                <p>Based on the requirements, I designed an Entity-Relationship model that captures all essential entities and their relationships. The design accounts for various scenarios including mall chains, restaurant chains, day packages, user relationships, voucher management, and complaint tracking.</p>
+
+                <div class="image-gallery">
+                    <div class="image-box">
+                        <img src="erdiagram.png" alt="Relational Schema" class="project-image">
+                        <div class="image-caption">Relational schema with primary keys (bolded)</div>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Implementation</h3>
+                <p>The finalised database schema was implemented using SQL DDL commands, incorporating primary and foreign keys as well as appropriate constraints. <span class="highlight">All relations were normalized to 3NF to eliminate redundancy and ensure data integrity.</span> The implementation also included indexes to optimize query performance, particularly for complex analytical queries.</p>
+                
+                <div class="image-gallery double">
+                    <div class="image-box">
+                        <img src="database1.png" alt="SQL DDL Commands" class="project-image">
+                        <div class="image-caption">Sample of SQL DDL commands used to create the database structure</div>
+                    </div>
+                    <div class="image-box">
+                        <img src="database3.png" alt="Insert Statements" class="project-image">
+                        <div class="image-caption">Sample of SQL INSERT statements used to populate the database</div>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Queries and Results</h3>
+                <p>After populating the database with realistic data, I implemented the required queries to extract meaningful insights. <span class="highlight">The queries demonstrate proficiency in complex SQL concepts including joins, subqueries, aggregation, and set operations.</span> Each query was optimized for performance, with execution plans analyzed to ensure efficient retrieval of results.</p>
+                
+                <div class="query-results">
+                    <div class="query-box">
+                        <h4>Query 1: Find the most popular day packages where all participants are related to one another as either family members or members of the same club</h4>
+                        <div class="code-snippet">
+                            SELECT D.did, D.description, COUNT(DISTINCT U.uid) AS numParticipants<br>
+                            FROM DayPackage D<br>
+                            JOIN UserAccount U ON D.uid = U.uid<br>
+                            JOIN Related R ON (U.uid = R.uid1 OR U.uid = R.uid2)<br>
+                            WHERE R.type IN ('family', 'club')<br>
+                            GROUP BY D.did, D.description<br>
+                            HAVING COUNT(DISTINCT U.uid) >= 1<br>
+                            ORDER BY numParticipants DESC;
+                        </div>
+                    </div>
+                    
+                    <div class="result-box">
+                        <h4>Result 1</h4>
+                        <div class="result-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>did</th>
+                                        <th>description</th>
+                                        <th>numParticipants</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>D0000001</td>
+                                        <td>Day Package 1</td>
+                                        <td>4</td>
+                                    </tr>
+                                    <tr>
+                                        <td>D0000002</td>
+                                        <td>Day Package 2</td>
+                                        <td>3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>D0000003</td>
+                                        <td>Day Package 3</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>D0000004</td>
+                                        <td>Day Package 4</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>D000005</td>
+                                        <td>Day Package 5</td>
+                                        <td>2</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="query-box">
+                        <h4>Query 2: What are the most popular recommendations from the app regarding the malls?</h4>
+                        <div class="code-snippet">
+                            SELECT M.mid, M.chainid, M.address, COUNT(*) AS numRecommendations<br>
+                            FROM Mall M, MallPackage MP, Recommendation R<br>
+                            WHERE M.mid = MP.mid AND MP.did = R.did<br>
+                            GROUP BY M.mid, M.chainid, M.address<br>
+                            ORDER BY numRecommendations DESC;
+                        </div>
+                    </div>
+                    
+                    <div class="result-box">
+                        <h4>Result 2</h4>
+                        <div class="result-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>mid</th>
+                                        <th>chainid</th>
+                                        <th>address</th>
+                                        <th>numRecommendations</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>M0000001</td>
+                                        <td>C0000001</td>
+                                        <td>123456</td>
+                                        <td>5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M0000002</td>
+                                        <td>C0000002</td>
+                                        <td>456789</td>
+                                        <td>2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M0000003</td>
+                                        <td>C0000003</td>
+                                        <td>789012</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M0000004</td>
+                                        <td>C0000004</td>
+                                        <td>012345</td>
+                                        <td>1</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M0000005</td>
+                                        <td>C0000005</td>
+                                        <td>345678</td>
+                                        <td>1</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="query-box">
+                        <h4>Query 3: Find 'compulsive' shoppers who have visited a certain mall more than 5 times. Find the youngest 'compulsive' shoppers and total amount they spent in total during Dec 2023</h4>
+                        <div class="code-snippet">
+                            SELECT U.uid, U.name, U.DoB, M.mid, COUNT(*) AS numVisits, SUM(SR.amountSpent) AS totalAmountSpent<br>
+                            FROM UserAccount U<br>
+                            JOIN ShopRecord SR ON U.uid = SR.uid<br>
+                            JOIN Shop S ON SR.sid = S.sid<br>
+                            JOIN Mall M ON S.mid = M.mid<br>
+                            WHERE SR.datetimeIn BETWEEN '2023-12-01' AND '2023-12-31'<br>
+                            GROUP BY U.uid, U.name, U.DoB, M.mid<br>
+                            HAVING COUNT(*) > 1<br>
+                            ORDER BY U.DoB ASC;
+                        </div>
+                    </div>
+                    
+                    <div class="result-box">
+                        <h4>Result 3</h4>
+                        <div class="result-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>uid</th>
+                                        <th>name</th>
+                                        <th>DoB</th>
+                                        <th>mid</th>
+                                        <th>numVisits</th>
+                                        <th>totalAmountSpent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>U0000003</td>
+                                        <td>Jack Doe</td>
+                                        <td>2000-03-03</td>
+                                        <td>M0000002</td>
+                                        <td>8</td>
+                                        <td>1592</td>
+                                    </tr>
+                                    <tr>
+                                        <td>U0000005</td>
+                                        <td>Jim Doe</td>
+                                        <td>2010-05-05</td>
+                                        <td>M0000001</td>
+                                        <td>6</td>
+                                        <td>2749.99</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="query-box">
+                        <h4>Query 4: Find users who have dined in all the restaurants in some malls, but have never dined in any restaurants in some other malls</h4>
+                        <div class="code-snippet">
+                            SELECT U.uid, U.name<br>
+                            FROM UserAccount U<br>
+                            WHERE EXISTS (<br>
+                            --Malls where the UserAccount has dined in all restaurants<br>
+                            SELECT 1<br>
+                            FROM Mall M<br>
+                            WHERE NOT EXISTS (<br>
+                            -- Restaurants in the mall where the UserAccount has not dined<br>
+                            SELECT 1<br>
+                            FROM RestaurantOutlet RO<br>
+                            WHERE RO.mid = M.mid<br>
+                            AND NOT EXISTS (<br>
+                            SELECT 1<br>
+                            FROM DineRecord DR<br>
+                            WHERE DR.oid = RO.oid<br>
+                            AND DR.uid = U.uid<br>
+                                    )<br>
+                                )<br>
+                            ) AND EXISTS (<br>
+                            -- Malls where the UserAccount has not dined in any restaurant<br>
+                            SELECT 1<br>
+                            FROM Mall M<br>
+                            WHERE NOT EXISTS (<br>
+                            -- Restaurants in the mall where the UserAccount has dined<br>
+                            SELECT 1<br>
+                            FROM RestaurantOutlet RO<br>
+                            WHERE RO.mid = M.mid<br>
+                            AND EXISTS (<br>
+                            SELECT 1<br>
+                            FROM DineRecord DR<br>
+                            WHERE DR.oid = RO.oid<br>
+                            AND DR.uid = U.uid<br>
+                                    )<br>
+                                )<br>
+                            );
+
+                        </div>
+                    </div>
+                    
+                    <div class="result-box">
+                        <h4>Result 4</h4>
+                        <div class="result-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>uid</th>
+                                        <th>name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>U0000003</td>
+                                        <td>Jack Doe</td>
+                                    </tr>
+                                    <tr>
+                                        <td>U0000002</td>
+                                        <td>Jane Doe</td>
+                                    </tr>
+                                    <tr>
+                                        <td>U0000004</td>
+                                        <td>Jill Doe</td>
+                                    </tr>
+                                    <tr>
+                                        <td>U0000005</td>
+                                        <td>Jim Doe</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="query-box">
+                        <h4>Query 5: What are the top 3 highest earning malls and restaurants?</h4>
+                        <div class="code-snippet">
+                            WITH CombinedRevenue AS (<br>
+                            -- Combine shop and restaurant revenues<br>
+                            SELECT M.mid, SR.amountSpent AS Revenue<br>
+                            FROM Mall M<br>
+                            JOIN Shop S ON M.mid = S.mid<br>
+                            JOIN ShopRecord SR ON S.sid = SR.sid<br>
+                            UNION ALL<br>
+                            SELECT M.mid, DR.amountSpent AS Revenue<br>
+                            FROM Mall M<br>
+                            JOIN RestaurantOutlet RO ON M.mid = RO.mid<br>
+                            JOIN DineRecord DR ON RO.oid = DR.oid<br>
+                            )<br>
+                            SELECT mid, SUM(Revenue) AS TotalRevenue<br>
+                            FROM CombinedRevenue<br>
+                            GROUP BY mid<br>
+                            ORDER BY TotalRevenue DESC<br>
+                            OFFSET 0 ROWS FETCH FIRST 3 ROWS ONLY;<br>
+
+                            SELECT O.oid, SUM(DR.amountSpent) AS<br> totalAmountSpent<br>
+                            FROM RestaurantOutlet O<br>
+                            JOIN DineRecord DR ON O.oid = DR.oid<br>
+                            GROUP BY O.oid<br>
+                            ORDER BY totalAmountSpent DESC<br>
+                            OFFSET 0 ROWS FETCH FIRST 3 ROWS<br>
+                            ONLY;<br>
+
+                        </div>
+                    </div>
+                    
+                    <div class="result-box">
+                        <h4>Result 5</h4>
+                        <div class="result-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>mid</th>
+                                        <th>TotalRevenue</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>M0000001</td>
+                                        <td>4149.99</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M0000002</td>
+                                        <td>2790</td>
+                                    </tr>
+                                    <tr>
+                                        <td>M0000003</td>
+                                        <td>2098</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>oid</th>
+                                        <th>totalAmountSpent</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>O0000005</td>
+                                        <td>1100</td>
+                                    </tr>
+                                    <tr>
+                                        <td>O0000004</td>
+                                        <td>1000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>O0000001</td>
+                                        <td>600</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="sub-heading">Data Insights</h3>
+                <p>The results of our queries provided valuable insights for the tourism agency. <span class="highlight">Family-oriented day packages emerged as the most popular, with shopping malls featuring diverse dining options receiving the highest number of recommendations.</span> We also identified a demographic of young compulsive shoppers who could be targeted for premium loyalty programs. The correlation between mall popularity and restaurant visits revealed opportunities for cross-promotion strategies.</p>
+                
+                <div class="tech-stack">
+                    <h3 class="sub-heading">Technologies Used</h3>
+                    <div class="tech-icons">
+                        <div class="tech-icon">
+                            <i class='bx bx-data'></i>
+                            <span>SQL</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class='bx bx-line-chart'></i>
+                            <span>Database Design</span>
+                        </div>
+                        <div class="tech-icon">
+                            <i class='bx bx-network-chart'></i>
+                            <span>ER Modeling</span>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="sub-heading">Conclusion</h3>
+                <p>This project demonstrates proficiency in database design, normalization, SQL implementation, and query optimization. The resulting database system efficiently supports the requirements of the tourism app while providing a foundation for data-driven decision making. The implementation showcases skills in complex query writing, performance tuning, and data modeling.</p>
+
+                <div class="btn-group">
+                    <a href="https://www.figma.com/board/M7ydLTWSyfoLwCSWOxjQV1/Intro-to-Database-Project-Map?node-id=0-1&p=f&t=MRzelXqb4RoCy7hz-0" class="btn">View Diagram</a>
+                    <a href="https://docs.google.com/document/d/13s1zxMS1aZVg7meii1H7z1-krjzgdD33x_64niQd1qA/edit?tab=t.0#heading=h.n9a6y3c0cixv" class="btn">Full Report</a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</body>
+</html>
