@@ -630,7 +630,79 @@ span{
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .contact-buttons {
-        gap: 1.5rem;
-    }
+  html {
+    font-size: 55%;
+  }
+
+  section {
+    padding: 6rem 5%;
+  }
+
+  .home {
+    flex-direction: column;
+    gap: 5rem;
+    text-align: center;
+  }
+
+  .home-img img {
+    width: 60vw;
+    top: 0;
+  }
+
+  .home-content {
+    align-items: center;
+  }
+
+  .btn-group {
+    justify-content: center;
+  }
+
+  .project-container {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-items::before {
+    left: 5px;
+  }
+
+  .timeline-item:nth-child(even),
+  .timeline-item:nth-child(odd) {
+    padding: 0 2rem;
+    text-align: left;
+  }
+
+  .slider-btn.prev,
+  .slider-btn.next {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 50%;
+  }
+
+  .heading {
+    font-size: 4rem;
+  }
+
+  .home-content h1 {
+    font-size: 4rem;
+  }
+
+  .home-content h3 {
+    font-size: 2rem;
+  }
+
+  .home-content p {
+    font-size: 1.4rem;
+  }
+
+  .skill-percentage {
+    font-size: 1.4rem;
+  }
+
+  .certification-card {
+    flex: 0 0 250px;
+  }
 }
